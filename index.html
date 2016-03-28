@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Github Resume</title>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/yui/2.7.0/reset-fonts-grids/reset-fonts-grids.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/resume.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+<!-- CSS styles for standard search box -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/resume.js"></script>
+
+</head>
+<body>
+<header id="head" role="banner"><h1>Your Github Resume</h1></header>
+	<form id="run" action="/." method="get">
+    <input id="username" type="text" placeholder="Enter your Github username">
+    <input id="gen" type="submit" value="Search" onClick="$('form#run').css('display','none');">
+</form>
+
+<div id="resume"></div> 
+<script id="resume-template" type="text/x-handlebars-template">
+<a href="index.html">Home</a>  
+<a href="#" id="print" onClick="window.print()">Print</a>  
+<a href="mailto:{{email}}?subject=Resume for {{name}}&body=Link to resume: {{resume_url}}" id="email">Email</a>
+<div id="cv" class="instaFade">
+	<div class="mainDetails">		
+		<div id="name">
+			<h1 class="quickFade delayTwo">{{name}}</h1>
+			<h3 class="quickFade delayThree flt">Software Engineer</h3>
+			</br>
+			<h3 class="quickFade delayThree flt">{{location}}</h3>
+		</div>
+		
+		<div id="contactDetails" class="quickFade delayFour">
+			<ul>
+				<li>e: <a href="mailto:{{email}}" target="_blank">{{email}}</a></li>
+				{{#blog}}
+				<li>w: <a href="http://www.bloggs.com">www.bloggs.com</a></li>
+				{{/blog}}
+				<li>Git: <a href="http://www.github.com/{{login}}" target="_blank">www.github.com/{{login}}</a></li>
+				
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div id="mainArea" class="quickFade delayFive">
+		<section>
+			<article>
+				<div class="sectionTitle">
+					<h1>Personal Profile</h1>
+				</div>
+				
+				<div class="sectionContent">
+					<p>{{name}} is a Developer from {{location}} and has joined Github in {{joiningYear}}, {{name}} have <a href="https://github.com/{{login}}?tab=repositories" target="_blank">{{public_repos}} {{repos_label}} </a>and is followed by 
+					<a href="https://github.com/{{login}}/followers" target="_blank">{{followers}} {{followers_label}}</a>.</p>
+				</div>
+			</article>
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Current Company</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<p>{{company}}</p>				
+			</div>
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Other Organizations</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<li>{{organizations}}</li>
+			</div>
+			<div class="clear"></div>
+		</section>	
+
+			<section>
+			<div class="sectionTitle">
+				<h1>Key Skills</h1>
+			</div>
+			
+			<div class="sectionContent"  id "skills">
+				<ul class="keySkills">
+				{{#each languages}}
+				<li>{{this}}</li>
+				{{/each}}									
+				</ul>				
+			</div>
+			<div class="clear"></div>
+		</section>	
+		
+		{{#if projects}}
+		<section>
+			<div class="sectionTitle">
+				<h1>Repositories</h1>
+			</div>			
+			<div class="sectionContent">
+			{{#each projDesc}}
+			<article class="articleRepo">
+			<h2><i><u>{{@key}}</u></i></h2>
+			<p class="subDetails">{{this}}.</p>		
+				</article>
+				{{/each}}										
+			</div>	
+			<div class="clear"></div>						
+		</section>
+		{{/if}}	
+
+			<section>
+			<div class="sectionTitle">
+				<h1>About this Resume</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<p>This résumé is generated automatically using public information from the developer's GitHub account. The repositories are ordered by popularity based on a very simple popularity heuristic that defines the popularity of a repository by its sum of watchers and forks. Do not hesitate to visit <a href="http://www.github.com/{{login}}" target="_blank">www.github.com/{{login}}</a>{{name}}'s GitHub page for a complete work history.</p>			
+			</div>
+			<div class="clear"></div>
+		</section>	
+			
+		
+	</div>
+</div>
+</script>
+
+</body>
+</html>
+
